@@ -2,11 +2,11 @@
 
 namespace InMemoryCachingStrategies.Strategy
 {
-    internal class DoubleLockCacheStrategy : BaseStrategy, ICacheStrategy
+    internal class DoubleCheckedLockingCacheStrategy : BaseStrategy, ICacheStrategy
     {
         public int? SyncLockDuration { get; set; }
 
-        public DoubleLockCacheStrategy(InMemoryCache cache = null, int? syncLockDuration = null)
+        public DoubleCheckedLockingCacheStrategy(InMemoryCache cache = null, int? syncLockDuration = null)
             : base(cache ?? new InMemoryCache())
         {
             this.SyncLockDuration = syncLockDuration;

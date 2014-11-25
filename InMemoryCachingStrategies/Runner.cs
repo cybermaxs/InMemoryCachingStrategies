@@ -61,7 +61,7 @@ namespace InMemoryCachingStrategies
             stuff();
             watcher.Restart();
 
-            var runTask = this.RunAsync(wks, tokenSource, 30);
+            var runTask = this.RunAsync(wks, tokenSource, 60);
 
             runTask.Wait();
 

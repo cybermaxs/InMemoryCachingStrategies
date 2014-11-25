@@ -21,7 +21,7 @@ namespace InMemoryCachingStrategies
             builder.AppendLine();
             if (this.Timings != null && this.Timings.Count > 0)
             {
-                var all = Timings.Select(i=>i.Item2);
+                var all = Timings.Where(i=>i!=null).Select(i=>i.Item2);
                 builder.AppendFormat("avg : {0}, min:{1}, max:{2}", all.Average(), all.Min(), all.Max());
                 builder.AppendLine();
                 builder.AppendFormat("50 : {0}, 500:{1}, 1100:{2}", all.Where(t => t < 50).Count(), all.Where(t => t < 500).Count(), all.Where(t => t < 1100).Count());

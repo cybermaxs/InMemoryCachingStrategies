@@ -17,8 +17,8 @@ namespace InMemoryCachingStrategies
             var runner = new Runner();
             var strategies = new List<ICacheStrategy>();
             strategies.Add(new BasicCacheStrategy());
-            strategies.Add(new SimpleLockCacheStrategy());
-            strategies.Add(new DoubleLockCacheStrategy());
+            //strategies.Add(new SimpleLockCacheStrategy());
+            strategies.Add(new DoubleCheckedLockingCacheStrategy());
             strategies.Add(new RefreshAheadCacheStrategy());
 
             foreach (var strategy in strategies)
