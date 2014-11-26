@@ -55,7 +55,7 @@ namespace InMemoryCachingStrategies
                 }, CACHE_TTL);
             };
 
-            var wks = this.CreateWorkers(stuff, tokenSource.Token, 30);
+            var wks = this.CreateWorkers(stuff, tokenSource.Token, 20);
 
             //preload : avoid cold-start
             stuff();
@@ -83,11 +83,8 @@ namespace InMemoryCachingStrategies
                     () =>
                     {
                         var random = new Random();
-                        while (true)
+                        while (!token.IsCancellationRequested)
                         {
-                            if (token.IsCancellationRequested)
-                                return;
-
                             long t1 = watcher.ElapsedMilliseconds;
                             stuff();
                             long t2 = watcher.ElapsedMilliseconds;
@@ -95,7 +92,7 @@ namespace InMemoryCachingStrategies
                             Interlocked.Increment(ref this.stats.gets);
                             this.stats.Timings.Add(Tuple.Create<long, long>(t1, t2 - t1));
                             //wait a little
-                            Thread.Sleep(random.Next(50, 200));
+                            Task.Delay(random.Next(100, 500)).Wait();
                         };
 
                     }, token, TaskCreationOptions.LongRunning);

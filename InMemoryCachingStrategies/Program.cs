@@ -11,8 +11,9 @@ namespace InMemoryCachingStrategies
         {
             Console.WriteLine("*** In memory caching stategy benchmarks ***");
 
-            Console.WriteLine("Press any key to start...");
-            Console.ReadKey();
+            Console.WriteLine("Press any key to start");
+            Console.ReadKey(); 
+            Console.Write("...");
 
             var runner = new Runner();
             var strategies = new List<ICacheStrategy>();
