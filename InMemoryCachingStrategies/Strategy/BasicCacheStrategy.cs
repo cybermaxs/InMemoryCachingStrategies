@@ -12,11 +12,11 @@ namespace InMemoryCachingStrategies.Strategy
         public T Get<T>(string key, Func<T> fetchItemFunc, int durationInSec, params string[] tokens)
         {
             var cacheKey = this.CreateKey(key, tokens);
-            var item = this.Cache.Get<T>(key);
+            var item = this.Cache.Get<T>(cacheKey);
             if (this.IsDefault(item))
             {
                 item = fetchItemFunc();
-                this.Cache.Set(key, item, durationInSec, false);
+                this.Cache.Set(cacheKey, item, durationInSec, false);
             }
             return item;
         }
